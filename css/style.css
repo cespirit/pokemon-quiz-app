@@ -55,29 +55,24 @@ body {
 	text-transform: uppercase;
 }
 
-.enemy-section,
-.player-section {
-	padding: 1em 2em;
-}
-
-section p {
-	margin-top: 0.2em;
-	margin-bottom: 0.2em;
-}
-
 .screen {
 	background: white;
 	margin: 5em auto;
 	max-width: 36em;
 }
 
+.screen p {
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+}
+
 .stand-out {
 	text-transform: uppercase;
 }
 
-/* Enemy Section */
-.enemy-section, 
+.enemy-section,
 .player-section {
+	padding: 1em 2em;
 	overflow: auto;
 }
 
@@ -85,41 +80,59 @@ section p {
 	width: 45%;
 }
 
-#enemy-stats {	
-	float: left;
-}
-
-.level, .health-points {
-	font-size: 0.75em;
-	padding-left: 0.5em;
-}
-
 .level {
 	margin-left: 3em;
 	letter-spacing: -0.1875em;
 }
 
-.health-points {	
+.level, 
+.hp {
+	font-size: 0.75em;
+	padding-left: 0.5em;
+}
+
+.hp {	
 	border-bottom: 0.3125em solid black;
 	padding-bottom: 0.5em;
 }
 
-.health-acro {
+.hp-title {
 	width: 25%;
 }
 
-.hp-text {
+.hp-bar {
+	width: 75%;
+	height: 1em;	
+	display: inline-block;
+	border: 0.1em solid black;
+}
+
+.hp-remaining {
+	height: 0.85em;
+	width: 100%;
+	background: gray;
+}
+
+.hp-bar {
+	width: 75%;
+}
+
+.hpText {
 	margin-left: 3em;
 }
 
-.health-bar {
-	width: 75%;
-	height: 1em;
-	background: gray;
-	display: inline-block;
+.sprite {
+	font-size: 7em;
 }
 
-.enemy-section .health-points {
+
+/* Enemy Section */
+
+#enemy-stats {	
+	float: left;
+}
+
+.enemy-section .hp-points {
 	border-left: 0.4375em solid black;
 	border-bottom-left-radius: 0.4375em;
 }
@@ -129,20 +142,14 @@ section p {
 	margin-right: 0.5em;
 }
 
-.sprite {
-	font-size: 7em;
-}
 
 /* Player Section */
-.player-section {
-	position: relative;
-}
 
 #player-stats {	
 	float: right;
 }
 
-.player-section .health-points {
+.player-section .hp-points {
 	border-right: 0.4375em solid black;
 	border-bottom-right-radius: 0.4375em;
 }
@@ -152,16 +159,21 @@ section p {
 	margin-left: 0.5em;
 }
 
+
 /* Dialog Section */
+
 .dialog-section {
 	text-transform: none;
+	padding: 0.5em 0.25em;
+	position: relative;
 }
 
 
-/* #dialog-menu, */
+#dialog-menu,
 #dialog-answer-options {
 	display: none;
 }
+
 
 #dialog-text,
 #dialog-menu, 
@@ -170,19 +182,15 @@ section p {
 	border-radius: 0.25em;
 }
 
-.dialog-section {
-	padding: 0.5em 0.25em;
-	position: relative;
-}
-
-.dialog-section div {
-	padding: 1em 1em;
-}
-
-#dialog-text {
+#dialog-text,
+#dialog-menu {
 	min-height: 7em;
+}
+
+#dialog-text {	
 	line-height: 1.75em;
 	position: relative;
+	padding: 1em 1em;
 }
 
 .fa-caret-down {
@@ -194,13 +202,12 @@ section p {
 }
 
 #dialog-menu {
-	min-height: 7em;
 	background: white;
 	position: absolute;
 	right: 0.25em;
 	bottom: 0.5em;
 	width: 55%;
-	padding: 1em 1.5em 1em 1.5em;
+	padding: 1em 1.5em;
 }
 
 #dialog-menu li {
@@ -215,13 +222,13 @@ section p {
 	text-decoration: none;
 }
 
-#dialog-menu li a {
-	color: #565656;
-}
-
 #dialog-menu .active,
 #dialog-answer-options a {
 	color: black;
+}
+
+#dialog-menu li a {
+	color: #565656;
 }
 
 #dialog-menu li .active:hover:before,
@@ -247,7 +254,6 @@ section p {
 
 
 /* Media Queries */
-
 @media only screen and (max-width: 600px) {
 	#enemy-sprite {
 		margin-right: 0.25em;
@@ -279,7 +285,7 @@ section p {
 		font-size: 0.9em;
 	}
 
-	.level, .health-points {
+	.level, .hp-points {
 		font-size: 0.75em;
 		padding-left: 0.5em;
 	}
@@ -295,13 +301,21 @@ section p {
 	#dialog-answer-options {
 		bottom: 6.5em;
 	}
-	
 }
 
 @media only screen and (max-width: 400px) {
 	.enemy-section,
 	.player-section {
 		padding: 0.5em 0.5em;
+	}
+
+	.sprite {
+		font-size: 6em;
+	}
+
+	#enemy-stats,
+	#player-stats {
+		width: 65%;
 	}
 
 	#enemy-sprite {
@@ -312,18 +326,9 @@ section p {
 		margin-left: 0;
 	}
 
-	#enemy-stats,
-	#player-stats {
-		width: 65%;
-	}
-
 	#enemy-sprite,
 	#player-sprite {
 		width: 30%;
-	}
-
-	.sprite {
-		font-size: 6em;
 	}
 
 	#dialog-text, 
