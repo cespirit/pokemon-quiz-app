@@ -80,13 +80,12 @@ body {
 	width: 45%;
 }
 
-.level {
+.level, .hp-text {
 	margin-left: 3em;
 	letter-spacing: -0.1875em;
 }
 
-.level, 
-.hp {
+.level, .hp {
 	font-size: 0.75em;
 	padding-left: 0.5em;
 }
@@ -117,10 +116,6 @@ body {
 	width: 75%;
 }
 
-.hpText {
-	margin-left: 3em;
-}
-
 .sprite {
 	font-size: 7em;
 }
@@ -132,7 +127,7 @@ body {
 	float: left;
 }
 
-.enemy-section .hp-points {
+.enemy-section .hp {
 	border-left: 0.4375em solid black;
 	border-bottom-left-radius: 0.4375em;
 }
@@ -149,7 +144,7 @@ body {
 	float: right;
 }
 
-.player-section .hp-points {
+.player-section .hp {
 	border-right: 0.4375em solid black;
 	border-bottom-right-radius: 0.4375em;
 }
@@ -285,7 +280,7 @@ body {
 		font-size: 0.9em;
 	}
 
-	.level, .hp-points {
+	.level, .hp {
 		font-size: 0.75em;
 		padding-left: 0.5em;
 	}
