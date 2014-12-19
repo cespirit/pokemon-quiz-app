@@ -33,10 +33,16 @@ $(document).ready(function(){
 
 	$(".dialog-section").click(function(){
 		if(gameStart) {
+			$(".player-section").removeClass("invisible");
+			$(".enemy-section").removeClass("invisible");
+			$("#victory-music")[0].pause();
+			$("#victory-music")[0].load();
+			$("#battle-music")[0].volume = 0.3;
+			$("#battle-music")[0].play();
 			$("#enemy-sprite i").removeClass("fainted");
 			$("#enemy-stats").removeClass("invisible");	
 			setDialogText("<p class='text'>Wild <span class='stand-out'>Quiz</span> appeared!</p>");
-			gameStart = false;
+			gameStart = false;			
 		} else if(!gameOver && isDialogClickable) {
 			switch(actionQueue[actionIndex]) {
 				case "enemyAttacks":
@@ -78,7 +84,7 @@ $(document).ready(function(){
 			switch(resultsQueue[resultsIndex]) {
 				case "enemyCondition":
 					$("#enemy-sprite i").addClass("fainted");
-					$("#enemy-stats").addClass("invisible");					
+					$("#enemy-stats").addClass("invisible");													
 					if(userWins) {						
 						setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> fainted!</p>");
 					} else {
@@ -87,6 +93,10 @@ $(document).ready(function(){
 					updateResultsIndex();
 					break;
 				case "expGained":
+					$("#battle-music")[0].pause();
+					$("#battle-music")[0].load();
+					$("#victory-music")[0].volume = 0.3;
+					$("#victory-music")[0].play();	
 					if(userWins) {
 						setDialogText("<p><span class='stand-out'>Player</span> gained 120 EXP. Points!</p>");
 					} else {
@@ -168,7 +178,7 @@ $(document).ready(function(){
 		questionIndex++;
 		if(questionIndex >= questions.length) {
 			questionIndex = 0;
-			gameOver = true;
+			gameOver = true;			
 		}
 	}
 

@@ -23,7 +23,7 @@
 <body>
 	<div class="screen">
 		<section id="message"></section>
-		<section class="enemy-section">
+		<section class="enemy-section invisible">
 			<div id="enemy-stats" class="stats">
 				<p class="stand-out">Quiz</p>
 				<p class="level">:L15</p>
@@ -39,7 +39,7 @@
 			</div>
 		</section>
 
-		<section class="player-section">
+		<section class="player-section invisible">
 			<div id="player-data">
 				<div id="player-stats" class="stats">
 					<p class="stand-out">Player</p>
@@ -78,5 +78,8 @@
 			</ul>
 		</section>
 	</div>
+
+	<audio id="battle-music" src="sound/battle-music.mp3"></audio>
+	<audio id="victory-music" src="sound/victory-music.mp3"></audio>
 </body>
 </html>

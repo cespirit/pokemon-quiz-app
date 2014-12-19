@@ -204,7 +204,8 @@ body {
 
 #dialog-menu,
 #dialog-answer-options,
-#message {
+#message
+ {
 	display: none;
 }
 
