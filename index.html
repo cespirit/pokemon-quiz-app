@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pokemon Red Version Quiz</title>
+	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="screen">
+		<section class="enemy-section">
+			<div id="enemy-stats" class="stats">
+				<p class="stand-out">Quiz</p>
+				<p class="level">:L15</p>
+				<div class="health-points">
+					<span class="health-acro">HP:</span><span class="health-bar"></span>
+					<p class="hp-text">100/100</p>
+				</div>
+			</div>
+
+			<div id="enemy-sprite" class="sprite">
+				<i class="fa fa-question-circle"></i>
+			</div>
+		</section>
+
+		<section class="player-section">
+			<div id="player-data">
+				<div id="player-stats" class="stats">
+					<p class="stand-out">Player</p>
+					<p class="level">:L10</p>
+					<div class="health-points">
+						<span class="health-acro">HP:</span><span class="health-bar"></span>
+						<p class="hp-text">50/50</p>
+					</div>
+				</div>
+			</div>
+			<div id="player-sprite" class="sprite">
+				<i class="fa fa-user"></i>
+			</div>
+		</section>
+
+		<section class="dialog-section">
+			<div id="dialog-text">
+				<p>
+				Wild <span class="stand-out">Quiz</span> appeared!
+				<!--
+				Who is the gym leader of Pewter City who favors Rock type pokemon?
+				-->
+				</p>
+				<i class="fa fa-caret-down fa-lg"></i>
+			</div>
+
+			<ul id="dialog-menu" class="stand-out">
+				<li><a href="#" class="active" id="menu-answer">Answer</a></li>
+				<li><a href="#" id="menu-pkmn">PKMN</a></li>
+				<li><a href="#" id="menu-item">Item</a></li>
+				<li><a href="#" id="menu-run">Run</a></li>
+			</ul>
+
+			<ul id="dialog-answer-options" class="stand-out">
+				<li><a href="#">Option 1</a></li>
+				<li><a href="#">Option 2</a></li>
+				<li><a href="#">Option 3</a></li>
+				<li><a href="#">Option 4</a></li>
+			</ul>
+		</section>
+	</div>
+</body>
+</html>
