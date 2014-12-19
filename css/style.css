@@ -74,6 +74,16 @@ body {
 	vertical-align: super;
 }
 
+.fainted {
+	opacity:0;
+  	transition: opacity 0.25s linear;
+}
+
+.invisible {
+	opacity:0;
+  	transition: opacity 1s linear;
+}
+
 .enemy-section,
 .player-section {
 	padding: 0.5em 2em;
@@ -126,6 +136,9 @@ body {
 	font-size: 8em;
 }
 
+.sprite i {
+	display: block;
+}
 
 /* Enemy Section */
 
