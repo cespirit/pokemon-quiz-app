@@ -9,11 +9,10 @@ $(document).ready(function(){
 	questions[1] = new Question("Who is the gym leader of Pewter City that favors Rock type pokemon?", 
 		                       ["Giovanni", "Misty", "Brock", "Koga"], 
 		                       "Brock");
-	/*
+
 	questions[2] = new Question("What is the pokemon type of the infamous MissingNo. glitch?", 
 		                       ["Bird", "Ghost", "Psychic", "Fire"], 
-		                       "Bird");
-	*/		                  
+		                       "Bird");	                  
 
 	var questionIndex = 0;
 	var actionQueue = ["enemyAttacks", "menu", "playerAttacks", "outcome"];
@@ -47,7 +46,8 @@ $(document).ready(function(){
 			switch(actionQueue[actionIndex]) {
 				case "enemyAttacks":
 					setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> Used <span class='stand-out'>Question!</span></p>");
-					$("#player-sprite i").effect("shake");						
+					$("#enemy-sprite i").effect("bounce");	
+					$("#player-sprite i").delay(400).effect("shake");						
 					updateActionIndex();
 					break;
 				case "menu":
@@ -64,7 +64,8 @@ $(document).ready(function(){
 					break;
 				case "outcome":
 					if(userChoice === currentAnswer) {
-						$("#enemy-sprite i").effect("shake");	
+						$("#player-sprite i").effect("bounce");
+						$("#enemy-sprite i").delay(400).effect("shake");	
 						setDialogText("<p>It's super effective!</p>");
 						calcEnemyHP();
 						score++;
