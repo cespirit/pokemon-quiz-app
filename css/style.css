@@ -70,10 +70,14 @@ body {
 	text-transform: uppercase;
 }
 
+.sup {
+	vertical-align: super;
+}
+
 .enemy-section,
 .player-section {
-	padding: 1em 2em;
-	overflow: auto;
+	padding: 0.5em 2em;
+	overflow: hidden;
 }
 
 .stats {
@@ -100,16 +104,18 @@ body {
 }
 
 .hp-bar {
-	width: 75%;
-	height: 1em;	
+	width: 75%;	
+	height: 0.87em;
 	display: inline-block;
 	border: 0.1em solid black;
+	border-radius: 0.5em;	
+	vertical-align: top;
 }
 
 .hp-remaining {
-	height: 0.85em;
+	height: 0.74em;
 	width: 100%;
-	background: gray;
+	background: #585858;	
 }
 
 .hp-bar {
@@ -117,7 +123,7 @@ body {
 }
 
 .sprite {
-	font-size: 7em;
+	font-size: 8em;
 }
 
 
@@ -205,6 +211,10 @@ body {
 	padding: 1em 1.5em;
 }
 
+#dialog-menu #menu-pkmn {
+	font-size: 0.75em;
+}
+
 #dialog-menu li {
 	display: inline-block;
 	width: 46%;
@@ -238,8 +248,8 @@ body {
 	background: white;
 	position: absolute;
 	right: 0.25em;
-	bottom: 7.25em;
-	width: 75%;
+	bottom: 100%;
+	width: 60%;
 	padding: 1em 2em;
 }
 
@@ -250,6 +260,10 @@ body {
 
 /* Media Queries */
 @media only screen and (max-width: 600px) {
+	.screen {
+		margin: 3em auto;
+	}
+
 	#enemy-sprite {
 		margin-right: 0.25em;
 	}
@@ -265,7 +279,6 @@ body {
 	#dialog-menu li {
 		margin-bottom: 0.75em;
 	}	
-
 }
 
 @media only screen and (max-width: 550px) { 
@@ -291,10 +304,6 @@ body {
 
 	#dialog-text {
 		min-height: 6.5em;
-	}
-
-	#dialog-answer-options {
-		bottom: 6.5em;
 	}
 }
 
@@ -336,7 +345,6 @@ body {
 	}
 
 	#dialog-answer-options {
-		bottom: 6.5em;
 		font-size: 0.8em;
 	}
 }
@@ -344,5 +352,15 @@ body {
 @media only screen and (max-width: 300px) {
 	.sprite {
 		font-size: 5em;
+	}
+
+	#enemy-stats,
+	#player-stats {
+		width: 70%;
+	}
+
+	#enemy-sprite,
+	#player-sprite {
+		width: 25%;
 	}
 }

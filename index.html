@@ -3,9 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Pokemon Red Version Quiz</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>  
+	<script src="js/app.js"></script>
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 	<div class="screen">
@@ -17,7 +28,6 @@
 						HP:<div class="hp-bar">
 							<div class="hp-remaining"></div>
 						</div>
-						<p class="hp-text">50/50</p>
 					</div>
 			</div>
 
@@ -46,18 +56,13 @@
 
 		<section class="dialog-section">
 			<div id="dialog-text">
-				<p>
-				Wild <span class="stand-out">Quiz</span> appeared!
-				<!--
-				Who is the gym leader of Pewter City who favors Rock type pokemon?
-				-->
-				</p>
+				<p class="text">Wild <span class="stand-out">Quiz</span> appeared!</p>
 				<i class="fa fa-caret-down fa-lg"></i>
 			</div>
 
 			<ul id="dialog-menu" class="stand-out">
 				<li><a href="#" class="active" id="menu-answer">Answer</a></li>
-				<li><a href="#" id="menu-pkmn">PKMN</a></li>
+				<li><a href="#" id="menu-pkmn"><span class="sup">P</span>K<span class="sup">M</span>N</a></li>
 				<li><a href="#" id="menu-item">Item</a></li>
 				<li><a href="#" id="menu-run">Run</a></li>
 			</ul>
