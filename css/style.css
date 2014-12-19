@@ -198,7 +198,7 @@ section p {
 	background: white;
 	position: absolute;
 	right: 0.25em;
-	top: 0.5em;
+	bottom: 0.5em;
 	width: 55%;
 	padding: 1em 1.5em 1em 1.5em;
 }
@@ -259,8 +259,6 @@ section p {
 
 	#dialog-menu {
 		padding: 1em 0 1em 1em;
-		top: 0;
-		bottom: 0;
 	}
 
 	#dialog-menu li {
