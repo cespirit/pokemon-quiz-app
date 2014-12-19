@@ -14,7 +14,10 @@ $(document).ready(function(){
 	var questionIndex = 0;
 	var actionQueue = ["enemyAttacks", "menu", "playerAttacks", "outcome"];
 	var actionIndex = 0;
-	var isGameOver = false;
+	var resultsQueue = ["enemyCondition", "expGained", "quizResults"];
+	var resultsIndex = 0;
+	var gameOver = false;
+	var userWins = false;
 	var score = 0;
 	var isDialogClickable = true;
 	var enemyHP = 100;
@@ -25,10 +28,11 @@ $(document).ready(function(){
 	
 
 	$(".dialog-section").click(function(){
-		if(isDialogClickable) {
+		if(!gameOver && isDialogClickable) {
 			switch(actionQueue[actionIndex]) {
 				case "enemyAttacks":
 					setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> Used <span class='stand-out'>Question!</span></p>");
+					$("#player-sprite i").effect("shake");						
 					updateActionIndex();
 					break;
 				case "menu":
@@ -40,20 +44,52 @@ $(document).ready(function(){
 				case "playerAttacks":
 					currentAnswer = questions[questionIndex].qAnswer;					
 					$("#dialog-answer-options").hide();
-					setDialogText("<p><span class='stand-out'>Player</span> answers with <span class='stand-out'>" + userChoice + "</span>!</p>");							
-					updateQuestionIndex();
+					setDialogText("<p><span class='stand-out'>Player</span> answers with <span class='stand-out'>" + userChoice + "</span>!</p>");	
+					$("#enemy-sprite i").effect("shake");										
 					updateActionIndex();
 					break;
 				case "outcome":
 					if(userChoice === currentAnswer) {
 						setDialogText("<p>It's super effective!</p>");
-						calculateHP();
+						calcEnemyHP();
+						score++;
 					} else {
 						setDialogText("<p>But, it failed!</p>");
 					}
+
+					if(score === questions.length) {
+						userWins = true;
+					}
+
+					updateQuestionIndex();
 					updateActionIndex();
 					break;
 			}
+		} else if(gameOver && isDialogClickable) {
+			switch(resultsQueue[resultsIndex]) {
+				case "enemyCondition":
+					if(userWins) {
+						setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> fainted!</p>");
+					} else {
+						setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> ran away!</p>");
+					}
+					updateResultsIndex();
+					break;
+				case "expGained":
+					if(userWins) {
+						setDialogText("<p><span class='stand-out'>Player</span> gained 120 EXP. Points!</p>");
+					} else {
+						setDialogText("<p><span class='stand-out'>Player</span> gained 0 EXP. Points!</p>");
+					}
+					updateResultsIndex();
+					break;
+				case "quizResults":
+					setDialogText("<p><span class='stand-out'>Player</span> answered " + score + " out of " + questions.length + " correctly!</p>");
+					updateResultsIndex();
+					isDialogClickable = false;
+					break;
+			}
+			
 		}
 	});
 
@@ -98,7 +134,14 @@ $(document).ready(function(){
 		questionIndex++;
 		if(questionIndex >= questions.length) {
 			questionIndex = 0;
-			isGameOver = true;
+			gameOver = true;
+		}
+	}
+
+	function updateResultsIndex() {
+		resultsIndex++;
+		if(resultsIndex >= resultsIndex.length) {
+			resultsIndex = 0;
 		}
 	}
 
@@ -114,7 +157,7 @@ $(document).ready(function(){
 		}
 	}
 
-	function calculateHP() {
+	function calcEnemyHP() {
 		enemyHP -= damagePerQuestion;
 		if(enemyHP < 0) {
 			enemyHP = 0;
@@ -124,4 +167,3 @@ $(document).ready(function(){
 	}
 
 });
-

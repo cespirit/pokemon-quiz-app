@@ -249,7 +249,7 @@ body {
 	position: absolute;
 	right: 0.25em;
 	bottom: 100%;
-	width: 60%;
+	min-width: 60%;
 	padding: 1em 2em;
 }
 
