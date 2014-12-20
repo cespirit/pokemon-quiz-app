@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div class="screen">
-		<section id="message"></section>
+		<section id="message"><p>Pokemon Red Version Quiz!</p></section>
 		<section class="enemy-section invisible">
 			<div id="enemy-stats" class="stats">
 				<p class="stand-out">Quiz</p>
@@ -33,9 +33,8 @@
 						</div>
 					</div>
 			</div>
-
-			<div id="enemy-sprite" class="sprite">
-				<i class="fa fa-question-circle"></i>
+			<div id="enemy-sprite">
+				<i id="enemy-sprite-icon" class="fa fa-question-circle sprite"></i>
 			</div>
 		</section>
 
@@ -52,14 +51,14 @@
 					</div>
 				</div>
 			</div>
-			<div id="player-sprite" class="sprite">
-				<i class="fa fa-user"></i>
+			<div id="player-sprite">
+				<i id="player-sprite-icon" class="fa fa-user sprite"></i>
 			</div>
 		</section>
 
 		<section class="dialog-section">
 			<div id="dialog-text">
-				<div class="text">Click this box! (<span class="stand-out">Warning</span>: Music will play!)</div>
+				<div class="text">Click this box or press enter to start! (<span class="stand-out">Warning</span>: Music will play!)</div>
 				<i class="fa fa-caret-down fa-lg"></i>
 			</div>
 
@@ -70,12 +69,7 @@
 				<li><a href="#" id="menu-run" class="invalid-option">Run</a></li>
 			</ul>
 
-			<ul id="dialog-answer-options" class="stand-out">
-				<li><a href="#">Option 1</a></li>
-				<li><a href="#">Option 2</a></li>
-				<li><a href="#">Option 3</a></li>
-				<li><a href="#">Option 4</a></li>
-			</ul>
+			<ul id="dialog-answer-options" class="stand-out"></ul>
 		</section>
 	</div>
 

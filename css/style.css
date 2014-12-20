@@ -95,6 +95,11 @@ body {
 	width: 45%;
 }
 
+.sprite {
+	font-size: 8em;
+	display: block;
+}
+
 .level, .hp-text {
 	margin-left: 3em;
 	letter-spacing: -0.1875em;
@@ -130,19 +135,14 @@ body {
 	border-radius: 0.5em;
 }
 
-.hp-bar {
-	width: 75%;
-}
-
-.sprite {
-	font-size: 8em;
-}
-
-.sprite i {
-	display: block;
+#dialog-menu,
+#dialog-answer-options
+ {
+	display: none;
 }
 
 /* Message Section */
+
 #message {	
 	position: absolute;
 	left: 0;
@@ -161,13 +161,13 @@ body {
 
 /* Enemy Section */
 
-#enemy-stats {	
-	float: left;
-}
-
 .enemy-section .hp {
 	border-left: 0.4375em solid black;
 	border-bottom-left-radius: 0.4375em;
+}
+
+#enemy-stats {	
+	float: left;
 }
 
 #enemy-sprite {
@@ -178,20 +178,19 @@ body {
 
 /* Player Section */
 
-#player-stats {	
-	float: right;
-}
-
 .player-section .hp {
 	border-right: 0.4375em solid black;
 	border-bottom-right-radius: 0.4375em;
+}
+
+#player-stats {	
+	float: right;
 }
 
 #player-sprite {
 	float: left;
 	margin-left: 0.5em;
 }
-
 
 /* Dialog Section */
 
@@ -200,15 +199,6 @@ body {
 	padding: 0.5em 0.25em;
 	position: relative;
 }
-
-
-#dialog-menu,
-#dialog-answer-options,
-#message
- {
-	display: none;
-}
-
 
 #dialog-text,
 #dialog-menu, 
@@ -255,10 +245,15 @@ body {
 	margin-bottom: 1.2em;
 }
 
-#dialog-menu li a,
+#dialog-menu a,
 #dialog-answer-options a
  {
 	text-decoration: none;
+	width: 100%;
+}
+
+#dialog-menu li a {
+	color: #565656;
 }
 
 #dialog-menu .active,
@@ -266,12 +261,8 @@ body {
 	color: black;
 }
 
-#dialog-menu li a {
-	color: #565656;
-}
-
-#dialog-menu li .active:hover:before,
-#dialog-menu li .active:focus:before,
+#dialog-menu li a:hover:before,
+#dialog-menu li a:focus:before,
 #dialog-answer-options li a:hover:before,
 #dialog-answer-options li a:focus:before {
 	content: ">";

@@ -3,21 +3,17 @@ $(document).ready(function(){
 	var questions = [];
 	questions[0] = new Question("Who gives you your first pokemon?", 
 		                       ["Mom", "Blue", "Officer Jenny", "Professor Oak"], 
-		                       "Professor Oak");
-
-	
+		                       "Professor Oak");	
 	questions[1] = new Question("Who is the gym leader of Pewter City that favors Rock type pokemon?", 
 		                       ["Giovanni", "Misty", "Brock", "Koga"], 
 		                       "Brock");
-
 	questions[2] = new Question("What is the pokemon type of the infamous MissingNo. glitch?", 
 		                       ["Bird", "Ghost", "Psychic", "Fire"], 
-		                       "Bird");	                  
-
-	var questionIndex = 0;
-	var actionQueue = ["enemyAttacks", "menu", "playerAttacks", "outcome"];
-	var actionIndex = 0;
+		                       "Bird");	                  	                  
+	var actionQueue = ["enemyAttacks", "menu", "playerAttacks", "outcome"];	
 	var resultsQueue = ["enemyCondition", "expGained", "quizResults", "playAgain"];
+	var actionIndex = 0;
+	var questionIndex = 0;
 	var resultsIndex = 0;	
 	var gameStart = true;
 	var userWins = false;
@@ -30,102 +26,15 @@ $(document).ready(function(){
 	var currentAnswer;
 	var userChoice;	
 
-	$(".dialog-section").click(function(){
-		if(gameStart) {
-			$(".player-section").removeClass("invisible");
-			$(".enemy-section").removeClass("invisible");
-			$("#victory-music")[0].pause();
-			$("#victory-music")[0].load();
-			$("#battle-music")[0].volume = 0.3;
-			$("#battle-music")[0].play();
-			$("#enemy-sprite i").removeClass("fainted");
-			$("#enemy-stats").removeClass("invisible");	
-			setDialogText("<p class='text'>Wild <span class='stand-out'>Quiz</span> appeared!</p>");
-			gameStart = false;			
-		} else if(!gameOver && isDialogClickable) {
-			switch(actionQueue[actionIndex]) {
-				case "enemyAttacks":
-					setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> Used <span class='stand-out'>Question!</span></p>");
-					$("#enemy-sprite i").effect("bounce");	
-					$("#player-sprite i").delay(400).effect("shake");						
-					updateActionIndex();
-					break;
-				case "menu":
-					setDialogText("");					
-					$("#dialog-menu").show();					
-					isDialogClickable = false;
-					updateActionIndex();
-					break;
-				case "playerAttacks":
-					currentAnswer = questions[questionIndex].qAnswer;					
-					$("#dialog-answer-options").hide();
-					setDialogText("<p><span class='stand-out'>Player</span> answers with <span class='stand-out'>" + userChoice + "</span>!</p>");										
-					updateActionIndex();
-					break;
-				case "outcome":
-					if(userChoice === currentAnswer) {
-						$("#player-sprite i").effect("bounce");
-						$("#enemy-sprite i").delay(400).effect("shake");	
-						setDialogText("<p>It's super effective!</p>");
-						calcEnemyHP();
-						score++;
-					} else {
-						setDialogText("<p>But, it failed!</p>");
-					}
-
-					if(score === questions.length) {
-						userWins = true;
-					}
-
-					updateQuestionIndex();
-					updateActionIndex();
-					break;
-			}
-		} else if(gameOver && isDialogClickable) {
-			switch(resultsQueue[resultsIndex]) {
-				case "enemyCondition":
-					$("#enemy-sprite i").addClass("fainted");
-					$("#enemy-stats").addClass("invisible");													
-					if(userWins) {						
-						setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> fainted!</p>");
-					} else {
-						setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> ran away!</p>");
-					}
-					updateResultsIndex();
-					break;
-				case "expGained":
-					$("#battle-music")[0].pause();
-					$("#battle-music")[0].load();
-					$("#victory-music")[0].volume = 0.3;
-					$("#victory-music")[0].play();	
-					if(userWins) {
-						setDialogText("<p><span class='stand-out'>Player</span> gained 120 EXP. Points!</p>");
-					} else {
-						setDialogText("<p><span class='stand-out'>Player</span> gained 0 EXP. Points!</p>");
-					}
-					updateResultsIndex();
-					break;
-				case "quizResults":
-					setDialogText("<p><span class='stand-out'>Player</span> answered " + score + " out of " + questions.length + " correctly!</p>");
-					updateResultsIndex();
-					break;
-				case "playAgain": 
-					setDialogText("Click to play again!</p>");
-					updateResultsIndex();
-					gameStart = true;
-					gameOver = false;					
-					userWins = false;
-					enemyHP = 100;
-					$(".enemy-section .hp-remaining").css("width", "100%");
-					score = 0;										
-					break;
-			}
-			
-		}
+	/* Move forward through game */
+	$(".dialog-section").click(gameControlFlow);	
+	$(document).keydown(function(event){
+		if(event.keyCode === 13) {	
+			gameControlFlow();
+		} 
 	});
 
-
-	/* Extra for other menu options (optional) */
+	/* Handle invalid menu options */
 	$("#dialog-menu .invalid-option").click(function(event) {
 		event.preventDefault();
 		var option = $(this).attr('id');
@@ -142,17 +51,16 @@ $(document).ready(function(){
 		}
 	});
 
-
 	/* User chooses to answer question */
 	$("#dialog-menu #menu-answer").click(function(event){
 		event.preventDefault();
 		$("#message").hide();
 		$("#dialog-menu").hide();
-		$("#dialog-answer-options").empty();
-		currentQuestion = questions[questionIndex].qText;		
-		setDialogText(currentQuestion);
+		$("#dialog-answer-options").empty();					
 		makeQuestionOptions();
-		$("#dialog-answer-options").show();		
+		$("#dialog-answer-options").show();	
+		currentQuestion = questions[questionIndex].qText;	
+		setDialogText(currentQuestion);				
 	});
 
 	/* User selects an answer */
@@ -161,6 +69,95 @@ $(document).ready(function(){
 		userChoice = event.target.text;		
 		isDialogClickable = true;
 	});
+
+	function gameControlFlow() {
+		if(gameStart) {
+			$("#message").hide();
+			$(".player-section").removeClass("invisible");
+			$(".enemy-section").removeClass("invisible");
+			$("#enemy-sprite-icon").removeClass("fainted");
+			$("#enemy-stats").removeClass("invisible");	
+			toggleMusic( {music: $("#victory-music")[0], volume: 0.3, load: true, toPlay: false} );
+			toggleMusic( {music: $("#battle-music")[0], volume: 0.3, load: false, toPlay: true} );						
+			setDialogText("<p class='text'>Wild <span class='stand-out'>Quiz</span> appeared!</p>");
+			gameStart = false;			
+		} else if(!gameOver && isDialogClickable) {
+			switch(actionQueue[actionIndex]) {
+				case "enemyAttacks":					
+					$("#enemy-sprite-icon").effect("bounce");	
+					$("#player-sprite-icon").delay(400).effect("shake");	
+					setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> used <span class='stand-out'>Question!</span></p>");					
+					updateActionIndex();
+					break;
+				case "menu":										
+					$("#dialog-menu").show();		
+					setDialogText("");			
+					isDialogClickable = false;
+					updateActionIndex();
+					break;
+				case "playerAttacks":
+					$("#dialog-answer-options").hide();
+					currentAnswer = questions[questionIndex].qAnswer;										
+					setDialogText("<p><span class='stand-out'>Player</span> answers with <span class='stand-out'>" + userChoice + "</span>!</p>");										
+					updateActionIndex();
+					break;
+				case "outcome":
+					if(userChoice === currentAnswer) {
+						$("#player-sprite-icon").effect("bounce");
+						$("#enemy-sprite-icon").delay(400).effect("shake");	
+						calcEnemyHP();
+						setDialogText("<p>It's super effective!</p>");						
+						score++;
+					} else {
+						setDialogText("<p>But, it failed!</p>");
+					}
+
+					questionIndex++;
+					if(questionIndex >= questions.length) {
+						if(score === questions.length) {
+							userWins = true;
+						}
+						gameOver = true;
+					}
+					
+					updateActionIndex();
+					break;
+			}
+		} else if(gameOver) {
+			switch(resultsQueue[resultsIndex]) {
+				case "enemyCondition":
+					$("#enemy-sprite-icon").addClass("fainted");
+					$("#enemy-stats").addClass("invisible");													
+					if(userWins) {						
+						setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> fainted!</p>");
+					} else {
+						setDialogText("<p>Enemy <span class='stand-out'>Quiz</span> ran away!</p>");
+					}
+					resultsIndex++;
+					break;
+				case "expGained":
+					toggleMusic( {music: $("#battle-music")[0], volume: 0.3, load: true, toPlay: false} );
+					toggleMusic( {music: $("#victory-music")[0], volume: 0.3, load: false, toPlay: true} );
+					if(userWins) {
+						setDialogText("<p><span class='stand-out'>Player</span> gained 120 EXP. Points!</p>");
+					} else {
+						setDialogText("<p><span class='stand-out'>Player</span> gained 0 EXP. Points!</p>");
+					}
+					resultsIndex++;
+					break;
+				case "quizResults":
+					setDialogText("<p><span class='stand-out'>Player</span> answered " + score + " out of " + questions.length + " correctly!</p>");
+					resultsIndex++;
+					break;
+				case "playAgain": 	
+					$(".player-section").addClass("invisible");				
+					showMessage("<p>Pokemon Red Version Quiz!</p>");
+					setDialogText("Click to play again!</p>");
+					resetGameVariables();														
+					break;
+			}			
+		}
+	}
 
 	function Question(qText, qOptions, qAnswer) {
 		this.qText = qText;
@@ -172,21 +169,6 @@ $(document).ready(function(){
 		actionIndex++;
 		if (actionIndex >= actionQueue.length) {
 			actionIndex = 0;
-		}
-	}
-
-	function updateQuestionIndex() {
-		questionIndex++;
-		if(questionIndex >= questions.length) {
-			questionIndex = 0;
-			gameOver = true;			
-		}
-	}
-
-	function updateResultsIndex() {
-		resultsIndex++;
-		if(resultsIndex >= resultsQueue.length) {
-			resultsIndex = 0;
 		}
 	}
 
@@ -214,6 +196,38 @@ $(document).ready(function(){
 		}
 		var newWidth = enemyHP + "%";
 		$(".enemy-section .hp-remaining").css("width", newWidth);
+	}
+
+	function toggleMusic(audio) { 
+		var defaultOptions = {
+			music: $("#battle-music")[0], 
+			volume: 0.3,
+			load: false,
+			toPlay: false
+		};
+
+		audio = $.extend({}, defaultOptions, audio);
+				
+		if(audio["toPlay"]) {
+			audio["music"].volume = audio["volume"];
+			audio["music"].play();
+		} else {
+			audio["music"].pause();			
+			if(audio["load"]) {
+				audio["music"].load();
+			}
+		}
+	}
+
+	function resetGameVariables() {
+		questionIndex = 0;
+		resultsIndex = 0;
+		gameStart = true;
+		gameOver = false;					
+		userWins = false;
+		enemyHP = 100;
+		$(".enemy-section .hp-remaining").css("width", "100%");
+		score = 0;	
 	}
 
 });
