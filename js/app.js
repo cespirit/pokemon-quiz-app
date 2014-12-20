@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	$("#battle-music")[0].load();
+
 	var questions = [];
 	questions[0] = new Question("Who gives you your first pokemon?", 
 		                       ["Mom", "Blue", "Officer Jenny", "Professor Oak"], 
