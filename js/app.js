@@ -37,11 +37,10 @@ $(document).ready(function(){
 	/* Handle invalid menu options */
 	$("#dialog-menu .invalid-option").click(function(event) {
 		event.preventDefault();
-		var option = $(this).attr('id');
-		$(this).blur();
+		var option = $(this).attr('id');		
 		switch(option) {
 			case "menu-item":
-				showMessage("<p>Your left your backpack at home!</p>");
+				showMessage("<p>You left your backpack at home!</p>");
 				break;
 			case "menu-pkmn":
 				showMessage("<p>You forgot your pokemon!</p>");
@@ -153,7 +152,7 @@ $(document).ready(function(){
 				case "playAgain": 	
 					$(".player-section").addClass("invisible");				
 					showMessage("<p>Pokemon Red Version Quiz!</p>");
-					setDialogText("Click to play again!</p>");
+					setDialogText("Click this box or press enter to play again!</p>");
 					resetGameVariables();														
 					break;
 			}			
