@@ -38,6 +38,7 @@ $(document).ready(function(){
 	$("#dialog-menu .invalid-option").click(function(event) {
 		event.preventDefault();
 		var option = $(this).attr('id');
+		$(this).blur();
 		switch(option) {
 			case "menu-item":
 				showMessage("<p>Your left your backpack at home!</p>");

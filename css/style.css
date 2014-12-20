@@ -232,7 +232,7 @@ body {
 	right: 0.25em;
 	bottom: 0.5em;
 	width: 55%;
-	padding: 1em 1.5em;
+	padding: 1em 0 1em 2em;
 }
 
 #dialog-menu #menu-pkmn {
@@ -280,6 +280,7 @@ body {
 
 #dialog-answer-options li {
 	padding: 0.5em 0;
+	margin-bottom: .65em;
 }
 
 
@@ -298,18 +299,18 @@ body {
 	}
 
 	#dialog-menu {
-		padding: 1em 0 1em 1em;
+		padding: 1em 0 0 1em;
 	}
-
-	#dialog-menu li {
-		margin-bottom: 0.75em;
-	}	
 }
 
 @media only screen and (max-width: 550px) { 
 	#enemy-stats,
 	#player-stats {
 		width: 60%;
+	}	
+
+	#dialog-menu li {
+		display: block;
 	}
 }
 
@@ -347,6 +348,11 @@ body {
 		width: 65%;
 	}
 
+	#enemy-sprite,
+	#player-sprite {
+		width: 30%;
+	}
+
 	#enemy-sprite {
 		margin-right: 0;
 	}
@@ -354,14 +360,10 @@ body {
 	#player-sprite {
 		margin-left: 0;
 	}
-
-	#enemy-sprite,
-	#player-sprite {
-		width: 30%;
-	}
-
+	
 	#dialog-text, 
 	#dialog-menu,
+	#dialog-answer-options,
 	#message {		
 		font-size: 0.8em;
 	}
@@ -369,24 +371,10 @@ body {
 	#dialog-text {
 		min-height: 6em;
 	}
-
-	#dialog-answer-options {
-		font-size: 0.8em;
-	}
 }
 
 @media only screen and (max-width: 300px) {
 	.sprite {
 		font-size: 5em;
-	}
-
-	#enemy-stats,
-	#player-stats {
-		width: 70%;
-	}
-
-	#enemy-sprite,
-	#player-sprite {
-		width: 25%;
 	}
 }
