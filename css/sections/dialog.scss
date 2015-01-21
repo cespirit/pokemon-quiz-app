@@ -1,0 +1,91 @@
+/* Dialog Section */
+
+.dialog-section {
+	text-transform: none;
+	padding: 0.5em 0.25em;
+	position: relative;
+}
+
+#dialog-text,
+#dialog-menu, 
+#dialog-answer-options {
+	border: 0.3125em double $black;
+	border-radius: 0.25em;
+}
+
+#dialog-text,
+#dialog-menu {
+	min-height: 7em;
+}
+
+#dialog-text {	
+	line-height: 1.75em;
+	position: relative;
+	padding: 1em 1em;
+}
+
+.fa-caret-down {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin-right: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+#dialog-menu {
+	background: white;
+	position: absolute;
+	right: 0.25em;
+	bottom: 0.5em;
+	width: 55%;
+	padding: 1em 0 1em 2em;
+
+	 #menu-pkmn {
+		font-size: 0.75em;
+	}
+
+	li {
+		display: inline-block;
+		width: 46%;
+		margin-bottom: 1.2em;	
+	}
+
+	a {
+		
+		@color(#565656);
+	}
+}
+
+#dialog-menu, 
+#dialog-answer-options {
+	a {
+		text-decoration: none;
+		width: 100%;
+	}
+
+	li a {
+		&:hover:before, &:focus:before {
+			content: ">";
+			margin-left: -1em;
+		}
+	}
+}
+
+#dialog-menu .active,
+#dialog-answer-options a {
+	color: black;
+}
+
+#dialog-answer-options {
+	background: white;
+	position: absolute;
+	right: 0.25em;
+	bottom: 100%;
+	min-width: 60%;
+	padding: 1em 2em;
+
+	li {
+		padding: 0.5em 0;
+		margin-bottom: .65em;
+	}
+}
