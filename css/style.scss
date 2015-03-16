@@ -149,6 +149,20 @@ body {
 @import "sections/dialog";
 
 
+.attribution {
+	color: white;
+	font-size: 0.65em;
+	margin: 0 auto 1em auto;
+	max-width: 36em;
+	line-height: 1.65em;
+	padding-left: 1em;
+	padding-right: 1em;
+
+	a {
+		text-decoration: none;
+	}
+}
+
 /* Media Queries */
 @media only screen and (max-width: 600px) {
 	.screen {
