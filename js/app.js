@@ -110,14 +110,20 @@ $(document).ready(function(){
 			switch(nextAction) {
 				case "gameStart":
 					$("#message").hide();
-					$(".player-section").removeClass("invisible");
-					$(".enemy-section").removeClass("invisible");
-					$("#enemy-sprite-icon").removeClass("fainted");
-					$("#enemy-stats").removeClass("invisible");	
+					$(".screen").css("visibility", "hidden");						
 					toggleMusic( {music: $("#victory-music")[0], volume: 0.3, load: true, toPlay: false} );
-					toggleMusic( {music: $("#battle-music")[0], volume: 0.3, load: false, toPlay: true} );						
-					setDialogText("<p class='text'>Wild <span class='stand-out'>Quiz</span> appeared!</p>");
-					nextAction = "enemyAttacks";
+					toggleMusic( {music: $("#battle-music")[0], volume: 0.3, load: false, toPlay: true} );	
+					$(".blackScreen").show(function(){
+						$(".screen").css("visibility", "visible");
+						setDialogText("");
+						$(".player-section").removeClass("invisible");
+					}).fadeOut(300, function(){						
+						setDialogText("<p class='text'>Wild <span class='stand-out'>Quiz</span> appeared!</p>");
+						$(".enemy-section").removeClass("invisible");
+						$("#enemy-sprite-icon").removeClass("fainted");
+						$("#enemy-stats").removeClass("invisible");								
+					});				
+					nextAction = "enemyAttacks";									
 					break;	
 				case "enemyAttacks":					
 					$("#enemy-sprite-icon").effect("bounce", function(){

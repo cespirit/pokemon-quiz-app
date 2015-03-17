@@ -16,6 +16,15 @@ body {
 	position: relative;
 }
 
+.blackScreen {
+	width: 100%;
+	height: 100%;	
+	position: absolute;
+	background: black;
+	z-index: 5000;
+	display: none;
+}
+
 .screen p {
 	margin-top: 0.2em;
 	margin-bottom: 0.2em;
